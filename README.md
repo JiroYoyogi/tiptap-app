@@ -6,9 +6,19 @@
 npm install @tiptap/react @tiptap/pm @tiptap/starter-kit
 ```
 
-StarterKitは太字や見出しなどよく使う機能が入ったパック
+#### 公式ドキュメント
 
 https://tiptap.dev/docs/editor/getting-started/install/react
+
+#### StarterKit
+
+太字や見出しなどよく使う機能のパック
+
+https://tiptap.dev/docs/editor/extensions/functionality/starterkit
+
+#### pm
+
+tiptapはprosemirrorというエディターライブラリーのラッパー
 
 ### ファイル編集
 
@@ -77,10 +87,6 @@ return (
 }
 ```
 
-### Starterkitとは？
-
-https://tiptap.dev/docs/editor/extensions/functionality/starterkit
-
 ## テキスト装飾（太字 / イタリック / 打ち消し）
 
 ### 太字
@@ -114,6 +120,10 @@ export default function MyEditorToolbar({ editor }: { editor: Editor }) {
   );
 }
 ```
+
+↓ useEditorStateの公式解説
+
+https://tiptap.dev/docs/guides/performance#use-useeditorstate-to-prevent-unnecessary-re-renders
 
 - MyEditor.tsx
 
@@ -398,7 +408,7 @@ pre {
 }
 ```
 
-### しンタックスハイライトを追加
+### シンタックスハイライトを追加
 
 - MyEditorToolbar.tsx
 
