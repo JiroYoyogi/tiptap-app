@@ -734,6 +734,12 @@ useEffect(() => {
 if (!editor) return null;
 ```
 
+引数の型
+
+```tsx
+import { EditorContent, useEditor, type Editor, type JSONContent } from '@tiptap/react';
+```
+
 - App.css
 
 ボタンのCSS
