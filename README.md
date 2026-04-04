@@ -596,6 +596,19 @@ const setFontColor = (color: string) => {
 };
 ```
 
+- App.css
+
+.my-editor__toolbar button {} に追加
+
+```
+  &.font-red {
+    color: red;
+  }
+  &.font-blue {
+    color: blue;
+  }
+```
+
 ## プレースフォルダー
 
 ### ライブラリをインストール
