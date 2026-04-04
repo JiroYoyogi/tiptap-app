@@ -813,7 +813,7 @@ interface Props {
   initialContent: JSONContent | string
 }
 
-export default function TiptapEditor({ setEditor, initialContent }: Props) {
+export default function MyEditor({ setEditor, initialContent }: Props) {
 ```
 
 editorにinitialContentをセット
