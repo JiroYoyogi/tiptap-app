@@ -19,3 +19,94 @@ main {
 h1 img {
   width: 240px;
 }
+
+.my-editor {
+  width: 640px;
+}
+
+.my-editor__content {
+  margin-top: 8px;
+  width: 100%;
+  min-height: 300px;
+  padding: 1em;
+  border: 1px solid #ccc;
+
+  * {
+    margin-top: 1em;
+  }
+
+  & > *:first-child {
+    margin-top: 0;
+  }
+
+  ul {
+    padding-left: 1.5rem;
+    list-style-type: disc;
+    * {
+      margin-top: 0;
+    }
+  }
+
+  pre {
+    background: #e9e9e980;
+    padding: 12px;
+    font-size: 12px;
+    border-radius: 5px;
+
+    code {
+      overflow-x: auto;
+    }
+  }
+  /* プレースフォルダー */
+  p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    color: #9ca3af;
+    pointer-events: none;
+    height: 0;
+    float: left;
+  }
+}
+
+.my-editor__toolbar {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background-color: #e5f2fc;
+
+  button {
+    background-color: transparent;
+    border: none;
+    padding: 4px;
+    line-height: 1;
+    /* 太字 */
+    &.bold {
+      font-weight: bold;
+    }
+    /* イタリック */
+    &.italic {
+      font-style: italic;
+    }
+    /* 打ち消し */
+    &.strike {
+      text-decoration: line-through;
+    }
+    &.font-red {
+      color: red;
+    }
+    &.font-blue {
+      color: blue;
+    }
+  }
+  button.is-active {
+    background-color: #a7d8ff;
+    font-weight: bold;
+  }
+}
+
+.btn-save {
+  background: #333;
+  border: none;
+  color: #fff;
+  padding: 0.5em 2em;
+  cursor: pointer;
+}
