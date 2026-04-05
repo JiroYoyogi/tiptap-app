@@ -816,8 +816,34 @@ interface Props {
 export default function MyEditor({ setEditor, initialContent }: Props) {
 ```
 
-editorにinitialContentをセット
+editorにを下記で置き換える（※変更は `content` のみ）
 
 ```tsx
-content: initialContent,
+  const editor = useEditor({
+    extensions: [
+      StarterKit.configure({
+        codeBlock: false,
+      }),
+      Placeholder.configure({
+        placeholder: 'ここに本文を書いてください',
+      }),
+      CodeBlockLowlight.configure({
+        lowlight,
+        enableTabIndentation: true,
+        tabSize: 2,
+      }),
+      TextStyle,
+      Color,
+    ],
+    content: initialContent,
+    immediatelyRender: false,
+    onUpdate: () => {
+      // 入力の度に何か処理をしたい場合
+    },
+    editorProps: {
+      attributes: {
+        class: 'my-editor__content',
+      },
+    },
+  });
 ```
