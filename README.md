@@ -1,3 +1,7 @@
+## はじめに
+
+[completeブランチ](https://github.com/JiroYoyogi/tiptap-app/tree/main) にハンズオンの内容を全て実装したコードを置いてます。コードを貼り付ける場所など迷った際は、参考にして下さい。
+
 ## 基本セットアップ（プレーンエディタ）
 
 ### ライブラリインストール
@@ -46,9 +50,9 @@ const editor = useEditor({
       class: 'my-editor__content',
     },
   },
-});
+})
 
-if (!editor) return null;
+if (!editor) return null
 ```
 
 返り値を変更
@@ -59,7 +63,7 @@ return (
     <EditorToolbar />
     <EditorContent editor={editor} />
   </div>
-);
+)
 ```
 
 - App.css
@@ -96,8 +100,8 @@ return (
 下記と置き換え
 
 ```tsx
-import { type Editor } from '@tiptap/react';
-import { useEditorState } from '@tiptap/react';
+import { type Editor } from '@tiptap/react'
+import { useEditorState } from '@tiptap/react'
 
 export default function MyEditorToolbar({ editor }: { editor: Editor }) {
   // カーソル位置や選択範囲の状態（太字かどうか等）を取得するためのフック
@@ -106,7 +110,7 @@ export default function MyEditorToolbar({ editor }: { editor: Editor }) {
     selector: ({ editor }) => ({
       isBold: editor?.isActive('bold') ?? false,
     }),
-  });
+  })
   return (
     <div className="my-editor__toolbar">
       <button
@@ -117,7 +121,7 @@ export default function MyEditorToolbar({ editor }: { editor: Editor }) {
         太字
       </button>
     </div>
-  );
+  )
 }
 ```
 
@@ -224,7 +228,7 @@ const { isBold, isItalic, isStrike, isH2, isH3 } = useEditorState({
     isH2: editor?.isActive('heading', { level: 2 }) ?? false,
     isH3: editor?.isActive('heading', { level: 3 }) ?? false,
   }),
-});
+})
 ```
 
 ボタンを追加
@@ -267,7 +271,7 @@ const { isBold, isItalic, isStrike, isH2, isH3, isBulletList } = useEditorState(
       isBulletList: editor?.isActive('bulletList') ?? false,
     }),
   },
-);
+)
 ```
 
 ボタンを追加
@@ -327,19 +331,19 @@ npm i @tiptap/extension-code-block-lowlight lowlight highlight.js
 ライブラリのimportなど
 
 ```tsx
-import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
-import javascript from 'highlight.js/lib/languages/javascript';
-import html from 'highlight.js/lib/languages/xml';
+import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
+import javascript from 'highlight.js/lib/languages/javascript'
+import html from 'highlight.js/lib/languages/xml'
 // common ... よく使わレてる言語のセット
-import { common, createLowlight } from 'lowlight';
-import 'highlight.js/styles/github.css';
+import { common, createLowlight } from 'lowlight'
+import 'highlight.js/styles/github.css'
 
-const lowlight = createLowlight(common);
+const lowlight = createLowlight(common)
 
 lowlight.register({
   javascript,
   html,
-});
+})
 ```
 
 useEditorのextensionsを置き換える
@@ -376,7 +380,7 @@ const { isBold, isItalic, isStrike, isH2, isH3, isBulletList, isCodeBlock } =
       isBulletList: editor?.isActive('bulletList') ?? false,
       isCodeBlock: editor?.isActive('codeBlock') ?? false,
     }),
-  });
+  })
 ```
 
 ボタンを追加
@@ -419,7 +423,7 @@ const CODE_LANGUAGES = [
   { label: 'Plain', value: '' },
   { label: 'JavaScript', value: 'javascript' },
   { label: 'HTML', value: 'html' },
-] as const;
+] as const
 ```
 
 useEditorStateを置き換える
@@ -447,7 +451,7 @@ const {
     isCodeBlock: editor?.isActive('codeBlock') ?? false,
     codeLanguage: editor?.getAttributes('codeBlock').language ?? '',
   }),
-});
+})
 ```
 
 セレクトボックスを追加
@@ -474,15 +478,15 @@ const {
 const handleCodeLanguageChange = (
   event: React.ChangeEvent<HTMLSelectElement>,
 ) => {
-  const language = event.target.value;
+  const language = event.target.value
 
   if (!language) {
-    editor.chain().focus().resetAttributes('codeBlock', 'language').run();
-    return;
+    editor.chain().focus().resetAttributes('codeBlock', 'language').run()
+    return
   }
 
-  editor.chain().focus().updateAttributes('codeBlock', { language }).run();
-};
+  editor.chain().focus().updateAttributes('codeBlock', { language }).run()
+}
 ```
 
 ## 文字色（Text Color）
@@ -502,7 +506,7 @@ npm i @tiptap/extension-text-style
 ライブラリの読み込み
 
 ```tsx
-import { Color, TextStyle } from '@tiptap/extension-text-style';
+import { Color, TextStyle } from '@tiptap/extension-text-style'
 ```
 
 useEditorのextensionsを置き換える
@@ -531,7 +535,7 @@ useEditorのextensionsを置き換える
 const COLOR = {
   red: '#ef4444',
   blue: '#3b82f6',
-};
+}
 ```
 
 useEditorStateを置き換える
@@ -561,7 +565,7 @@ const {
     codeLanguage: editor?.getAttributes('codeBlock').language ?? '',
     fontColor: editor?.getAttributes('textStyle').color,
   }),
-});
+})
 ```
 
 ボタンを追加
@@ -589,16 +593,16 @@ const {
 ```tsx
 const setFontColor = (color: string) => {
   if (color === fontColor) {
-    editor.chain().focus().unsetColor().run();
-    return;
+    editor.chain().focus().unsetColor().run()
+    return
   }
-  editor.chain().focus().setColor(color).run();
-};
+  editor.chain().focus().setColor(color).run()
+}
 ```
 
 - App.css
 
-.my-editor__toolbar button {} に追加
+.my-editor\_\_toolbar button {} に追加
 
 ```
   &.font-red {
@@ -624,7 +628,7 @@ npm i @tiptap/extension-placeholder
 ライブラリの読み込み
 
 ```tsx
-import Placeholder from '@tiptap/extension-placeholder';
+import Placeholder from '@tiptap/extension-placeholder'
 ```
 
 extensionsを置き換える
@@ -669,20 +673,20 @@ p.is-editor-empty:first-child::before {
 保存ボタンを設置。クリックするとconsoleにエディターの内容を表示
 
 ```tsx
-import './App.css';
-import { useState } from 'react';
-import MyEditor from './components/MyEditor';
-import type { Editor, JSONContent } from '@tiptap/react';
+import './App.css'
+import { useState } from 'react'
+import MyEditor from './components/MyEditor'
+import type { Editor, JSONContent } from '@tiptap/react'
 
 function App() {
-  const [editor, setEditor] = useState<Editor | null>(null);
+  const [editor, setEditor] = useState<Editor | null>(null)
 
   const doSave = () => {
-    if (!editor) return;
+    if (!editor) return
 
-    console.log('HTML:', editor.getHTML());
-    console.log('JSON:', editor.getJSON());
-  };
+    console.log('HTML:', editor.getHTML())
+    console.log('JSON:', editor.getJSON())
+  }
 
   return (
     <>
@@ -696,10 +700,10 @@ function App() {
         </button>
       </main>
     </>
-  );
+  )
 }
 
-export default App;
+export default App
 ```
 
 - MyEditor.tsx
@@ -708,7 +712,7 @@ export default App;
 
 ```tsx
 interface Props {
-  setEditor: React.Dispatch<React.SetStateAction<Editor | null>>;
+  setEditor: React.Dispatch<React.SetStateAction<Editor | null>>
 }
 ```
 
@@ -722,22 +726,27 @@ function MyEditor({ setEditor }: Props)
 
 ```tsx
 useEffect(() => {
-  if (!editor) return;
+  if (!editor) return
 
-  setEditor(editor);
+  setEditor(editor)
 
   return () => {
-    setEditor(null);
-  };
-}, [editor, setEditor]);
+    setEditor(null)
+  }
+}, [editor, setEditor])
 
-if (!editor) return null;
+if (!editor) return null
 ```
 
 引数の型
 
 ```tsx
-import { EditorContent, useEditor, type Editor, type JSONContent } from '@tiptap/react';
+import {
+  EditorContent,
+  useEditor,
+  type Editor,
+  type JSONContent,
+} from '@tiptap/react'
 ```
 
 - App.css
@@ -761,40 +770,40 @@ import { EditorContent, useEditor, type Editor, type JSONContent } from '@tiptap
 ローカルストレージのキー名設定
 
 ```tsx
-const STORAGE_KEY = 'tiptap-app';
+const STORAGE_KEY = 'tiptap-app'
 ```
 
 ローカルストレージからデータ読み込み
 
 ```tsx
 const [initialContent] = useState<JSONContent | string>(() => {
-  const saved = localStorage.getItem(STORAGE_KEY);
+  const saved = localStorage.getItem(STORAGE_KEY)
 
   if (!saved) {
-    return '';
+    return ''
   }
 
   try {
-    return JSON.parse(saved) as JSONContent;
+    return JSON.parse(saved) as JSONContent
   } catch {
-    return '';
+    return ''
   }
-});
+})
 ```
 
 doSaveを改造
 
 ```tsx
 const doSave = () => {
-  if (!editor) return;
+  if (!editor) return
 
-  const json = editor.getJSON();
+  const json = editor.getJSON()
 
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(json));
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(json))
 
-  console.log('HTML:', editor.getHTML());
-  console.log('JSON:', json);
-};
+  console.log('HTML:', editor.getHTML())
+  console.log('JSON:', json)
+}
 ```
 
 initialContentをEditorに渡す
@@ -819,31 +828,31 @@ export default function MyEditor({ setEditor, initialContent }: Props) {
 editorにを下記で置き換える（※変更は `content` のみ）
 
 ```tsx
-  const editor = useEditor({
-    extensions: [
-      StarterKit.configure({
-        codeBlock: false,
-      }),
-      Placeholder.configure({
-        placeholder: 'ここに本文を書いてください',
-      }),
-      CodeBlockLowlight.configure({
-        lowlight,
-        enableTabIndentation: true,
-        tabSize: 2,
-      }),
-      TextStyle,
-      Color,
-    ],
-    content: initialContent,
-    immediatelyRender: false,
-    onUpdate: () => {
-      // 入力の度に何か処理をしたい場合
+const editor = useEditor({
+  extensions: [
+    StarterKit.configure({
+      codeBlock: false,
+    }),
+    Placeholder.configure({
+      placeholder: 'ここに本文を書いてください',
+    }),
+    CodeBlockLowlight.configure({
+      lowlight,
+      enableTabIndentation: true,
+      tabSize: 2,
+    }),
+    TextStyle,
+    Color,
+  ],
+  content: initialContent,
+  immediatelyRender: false,
+  onUpdate: () => {
+    // 入力の度に何か処理をしたい場合
+  },
+  editorProps: {
+    attributes: {
+      class: 'my-editor__content',
     },
-    editorProps: {
-      attributes: {
-        class: 'my-editor__content',
-      },
-    },
-  });
+  },
+})
 ```
